@@ -9,6 +9,7 @@ function EmployeesList() {
   }, []);
 
   const employeesList = useSelector(selectEmployeesList);
+  console.log(employeesList);
   return (
     <main>
       <div id="employee-div" className="container">
