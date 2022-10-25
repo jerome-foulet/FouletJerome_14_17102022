@@ -12,6 +12,10 @@
 }
 
 label {
+  color: black;
+}
+
+label:not([class^="Mui"]) {
   display: block;
   margin-top: 1rem;
   margin-bottom: 10px;

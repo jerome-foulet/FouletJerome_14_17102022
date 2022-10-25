@@ -14,7 +14,7 @@ export const addEmployee = (store, payload) => {
 
 export default createReducer(initialState, (builder) =>
   builder.addCase(employeesAdd, (draft, action) => {
-    draft.list.push(action.payload);
+    draft.list.push({ ...action.payload, id: draft.list.length });
     return;
   })
 );

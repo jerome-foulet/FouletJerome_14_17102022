@@ -9,8 +9,12 @@ import { useState } from "react";
 export default function Form({ showModalCallback }) {
   const store = useStore();
 
-  const [dateOfBirth, setDateOfBirth] = useState(null);
-  const [dateStart, setDateStart] = useState(null);
+  const [fields, setFields] = useState({
+    dateOfBirth: "",
+    dateStart: "",
+    state: "",
+    department: "",
+  });
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -18,13 +22,17 @@ export default function Form({ showModalCallback }) {
       addEmployee(store, {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value,
-        dateOfBirth: dateOfBirth ? dateOfBirth.format("MM/DD/YYYY") : "",
-        startDate: dateStart ? dateStart.format("MM/DD/YYYY") : "",
+        dateOfBirth: fields.dateOfBirth
+          ? fields.dateOfBirth.format("MM/DD/YYYY")
+          : "",
+        startDate: fields.dateStart
+          ? fields.dateStart.format("MM/DD/YYYY")
+          : "",
         street: event.target.street.value,
         city: event.target.city.value,
-        state: event.target.state.value,
+        state: fields.state,
         zipCode: event.target.zipCode.value,
-        department: event.target.department.value,
+        department: fields.department,
       })
     ) {
       showModalCallback(true);
@@ -37,15 +45,17 @@ export default function Form({ showModalCallback }) {
       <Input id="lastName" label="Last Name" />
 
       <DatePicker
-        value={dateOfBirth}
-        setValue={setDateOfBirth}
+        fields={fields}
+        keyValue="dateOfBirth"
+        setValue={setFields}
         id="dateOfBirth"
         label="Date of Birth"
       />
 
       <DatePicker
-        value={dateStart}
-        setValue={setDateStart}
+        fields={fields}
+        keyValue="dateStart"
+        setValue={setFields}
         id="startDate"
         label="Start Date"
       />
@@ -54,11 +64,23 @@ export default function Form({ showModalCallback }) {
         <legend>Address</legend>
         <Input id="street" label="Street" />
         <Input id="city" label="City" />
-        <Select name="state" label="State" options={states} />
+        <br></br>
+        <br></br>
+        <Select
+          keyValue="state"
+          fields={fields}
+          setValue={setFields}
+          name="state"
+          label="State"
+          options={states}
+        />
         <Input id="zipCode" type="number" label="Zip Code" />
       </fieldset>
-
+      <br></br>
       <Select
+        keyValue="department"
+        fields={fields}
+        setValue={setFields}
         name="department"
         label="Department"
         options={[
@@ -73,6 +95,7 @@ export default function Form({ showModalCallback }) {
       <button type="submit" className="center">
         Save
       </button>
+      <br></br>
     </form>
   );
 }

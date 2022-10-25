@@ -1,9 +1,9 @@
 import Datetime from "react-datetime";
 import "../utils/style/react-datetime.css";
 
-export default function DatePicker({ value, setValue, id, label }) {
+export default function DatePicker({ fields, keyValue, setValue, id, label }) {
   const handleChange = (data) => {
-    setValue(data);
+    setValue({ ...fields, [keyValue]: data });
   };
 
   let inputProps = {
@@ -18,7 +18,7 @@ export default function DatePicker({ value, setValue, id, label }) {
         closeOnSelect={true}
         dateFormat="MM/DD/YYYY"
         timeFormat={false}
-        value={value}
+        value={fields[keyValue]}
         onChange={handleChange}
       />
     </>
