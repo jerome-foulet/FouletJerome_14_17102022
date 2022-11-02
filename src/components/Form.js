@@ -43,7 +43,8 @@ export default function Form({ showModalCallback }) {
     <form onSubmit={handleFormSubmit}>
       <Input id="firstName" label="FirstName" />
       <Input id="lastName" label="Last Name" />
-
+      <br />
+      <br />
       <DatePicker
         fields={fields}
         keyValue="dateOfBirth"
@@ -51,7 +52,8 @@ export default function Form({ showModalCallback }) {
         id="dateOfBirth"
         label="Date of Birth"
       />
-
+      <br />
+      <br />
       <DatePicker
         fields={fields}
         keyValue="dateStart"
@@ -64,8 +66,8 @@ export default function Form({ showModalCallback }) {
         <legend>Address</legend>
         <Input id="street" label="Street" />
         <Input id="city" label="City" />
-        <br></br>
-        <br></br>
+        <br />
+        <br />
         <Select
           keyValue="state"
           fields={fields}
@@ -76,7 +78,7 @@ export default function Form({ showModalCallback }) {
         />
         <Input id="zipCode" type="number" label="Zip Code" />
       </fieldset>
-      <br></br>
+      <br />
       <Select
         keyValue="department"
         fields={fields}
@@ -95,7 +97,7 @@ export default function Form({ showModalCallback }) {
       <button type="submit" className="center">
         Save
       </button>
-      <br></br>
+      <br />
     </form>
   );
 }

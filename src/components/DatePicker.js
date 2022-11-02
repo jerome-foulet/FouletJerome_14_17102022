@@ -1,26 +1,27 @@
-import Datetime from "react-datetime";
-import "../utils/style/react-datetime.css";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
 
 export default function DatePicker({ fields, keyValue, setValue, id, label }) {
   const handleChange = (data) => {
+    //console.log(data);
     setValue({ ...fields, [keyValue]: data });
   };
 
-  let inputProps = {
+  /*let inputProps = {
     id: { id },
-  };
+  };*/
 
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <Datetime
-        inputProps={inputProps}
-        closeOnSelect={true}
-        dateFormat="MM/DD/YYYY"
-        timeFormat={false}
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <DesktopDatePicker
+        label={label}
+        inputFormat="MM/DD/YYYY"
         value={fields[keyValue]}
         onChange={handleChange}
+        renderInput={(params) => <TextField {...params} />}
       />
-    </>
+    </LocalizationProvider>
   );
 }
