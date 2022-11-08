@@ -10,9 +10,14 @@ export default function Form({ showModalCallback }) {
   const store = useStore();
 
   const [fields, setFields] = useState({
+    firstName: "",
+    lastName: "",
     dateOfBirth: "",
     dateStart: "",
+    street: "",
+    city: "",
     state: "",
+    zipCode: "",
     department: "",
   });
 
@@ -20,18 +25,18 @@ export default function Form({ showModalCallback }) {
     event.preventDefault();
     if (
       addEmployee(store, {
-        firstName: event.target.firstName.value,
-        lastName: event.target.lastName.value,
+        firstName: fields.firstName,
+        lastName: fields.lastName,
         dateOfBirth: fields.dateOfBirth
           ? fields.dateOfBirth.format("MM/DD/YYYY")
           : "",
         startDate: fields.dateStart
           ? fields.dateStart.format("MM/DD/YYYY")
           : "",
-        street: event.target.street.value,
-        city: event.target.city.value,
+        street: fields.street,
+        city: fields.city,
         state: fields.state,
-        zipCode: event.target.zipCode.value,
+        zipCode: fields.zipCode,
         department: fields.department,
       })
     ) {
@@ -41,8 +46,20 @@ export default function Form({ showModalCallback }) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Input id="firstName" label="FirstName" />
-      <Input id="lastName" label="Last Name" />
+      <Input
+        fields={fields}
+        setValue={setFields}
+        id="firstName"
+        label="FirstName"
+      />
+      <br />
+      <br />
+      <Input
+        fields={fields}
+        setValue={setFields}
+        id="lastName"
+        label="Last Name"
+      />
       <br />
       <br />
       <DatePicker
@@ -64,8 +81,15 @@ export default function Form({ showModalCallback }) {
 
       <fieldset className="address">
         <legend>Address</legend>
-        <Input id="street" label="Street" />
-        <Input id="city" label="City" />
+        <Input
+          fields={fields}
+          setValue={setFields}
+          id="street"
+          label="Street"
+        />
+        <br />
+        <br />
+        <Input fields={fields} setValue={setFields} id="city" label="City" />
         <br />
         <br />
         <Select
@@ -76,7 +100,15 @@ export default function Form({ showModalCallback }) {
           label="State"
           options={states}
         />
-        <Input id="zipCode" type="number" label="Zip Code" />
+        <br />
+        <br />
+        <Input
+          fields={fields}
+          setValue={setFields}
+          id="zipCode"
+          type="number"
+          label="Zip Code"
+        />
       </fieldset>
       <br />
       <Select
